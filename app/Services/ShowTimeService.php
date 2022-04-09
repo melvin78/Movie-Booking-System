@@ -23,4 +23,14 @@ class ShowTimeService implements ShowTimeServiceInterface
         return $this->showTimeRepository->FindAllShowTimes();
 
     }
+
+    public function SpecificShowTimeId($time_from,$time_to){
+
+        return $this->showTimeRepository->FindShowTimeByShowTimeStartDateAndShowTimeEndDate($time_from,$time_to);
+    }
+
+    public function GetMovieTicketPrice($time_from, $time_to)
+    {
+        return $this->showTimeRepository->FindPriceByShowTimeStartDateAndShowTimeEndDate($time_from,$time_to);
+    }
 }

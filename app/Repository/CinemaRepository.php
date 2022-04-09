@@ -12,4 +12,14 @@ class CinemaRepository implements CinemaRepositoryInterface
     {
          return Cinemas::all();
     }
+
+    public function FindCinemaByName($cinema_name)
+    {
+        return Cinemas::where('cinema','=',$cinema_name)->value('short_code');
+    }
+
+    public function FindCinemaById($cinema_name)
+    {
+        return Cinemas::where('cinema','=',$cinema_name)->value('id');
+    }
 }

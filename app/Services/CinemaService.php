@@ -23,4 +23,15 @@ class CinemaService implements CinemaServiceInterface
     {
         return $this->cinemaRepository->FindCinemas();
     }
+
+    public function GetCinemaShortCode($cinema_name)
+    {
+        return $this->cinemaRepository->FindCinemaByName($cinema_name);
+    }
+
+    public function GetCinemaId($cinema_name)
+    {
+
+        return $this->cinemaRepository->FindCinemaById($cinema_name);
+    }
 }

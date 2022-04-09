@@ -28,6 +28,7 @@ class TicketRepository implements TicketRepositoryInterface
     public function AddTickets(array $ticketDetails)
     {
 
+        return Tickets::create($ticketDetails);
     }
 
     public function pdateTickets($ticketId, array $newDetails)

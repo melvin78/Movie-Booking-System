@@ -20,4 +20,14 @@ class MoviesService implements MovieServiceInterface
 
         return $this->movieRepository->FindAllMovies();
     }
+
+    public function MovieShortCode($movie_name)
+    {
+        return $this->movieRepository->FindMovieShortCode($movie_name);
+    }
+
+    public function MovieId($movie_name)
+    {
+        return $this->movieRepository->FindMovieId($movie_name);
+    }
 }

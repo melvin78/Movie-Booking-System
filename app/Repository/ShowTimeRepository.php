@@ -13,4 +13,18 @@ class ShowTimeRepository implements ShowTimeRepositoryInterface
 
         return ShowTime::all();
     }
+
+    public function FindShowTimeByShowTimeStartDateAndShowTimeEndDate($time_from, $time_to)
+    {
+        return ShowTime::whereTime('time_from','=',$time_from)
+                        ->whereTime('time_to','=',$time_to)
+                        ->value('id');
+    }
+
+    public function FindPriceByShowTimeStartDateAndShowTimeEndDate($time_from, $time_to)
+    {
+        return ShowTime::whereTime('time_from','=',$time_from)
+            ->whereTime('time_to','=',$time_to)
+            ->value('price');
+    }
 }

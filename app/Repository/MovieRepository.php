@@ -13,4 +13,14 @@ class MovieRepository implements MovieRepositoryInterface
 
         return Movies::all();
     }
+
+    public function FindMovieShortCode($movie_name)
+    {
+        return Movies::where('movie_name','=',$movie_name)->value('short_code');
+    }
+
+    public function FindMovieId($movie_name)
+    {
+        return Movies::where('movie_name','=',$movie_name)->value('id');
+    }
 }
