@@ -13,4 +13,17 @@ class SnackRepository implements SnackRepositoryInterface
 
         return Snacks::all();
     }
+
+
+    public function FindSnackPriceBySnackName($snack_name)
+    {
+        return Snacks::where('description','=',$snack_name)
+            ->value('price');
+    }
+
+    public function FindSnackIdBySnackName($snack_name)
+    {
+        return Snacks::where('description','=',$snack_name)
+            ->value('id');
+    }
 }

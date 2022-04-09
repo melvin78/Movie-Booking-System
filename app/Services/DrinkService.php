@@ -19,4 +19,14 @@ class DrinkService implements DrinkServiceInterface
     {
         return $this->drinkRepository->FindAllDrinks();
     }
+
+    public function GetDrinkPrice($drink_name)
+    {
+        return $this->drinkRepository->FindDrinkPrice($drink_name);
+    }
+
+    public function GetDrinkId($drink_name)
+    {
+        return $this->drinkRepository->FindDrinkId($drink_name);
+    }
 }

@@ -13,4 +13,14 @@ class DrinkRepository implements DrinkRepositoryInterface
 
         return Drink::all();
     }
+
+    public function FindDrinkPrice($drink_name)
+    {
+        return Drink::where('description','=',$drink_name)->value('price');
+    }
+
+    public function FindDrinkId($drink_name)
+    {
+        return Drink::where('description','=',$drink_name)->value('id');
+    }
 }

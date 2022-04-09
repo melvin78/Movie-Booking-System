@@ -21,4 +21,14 @@ class SnacksService implements SnackServiceInterface
     {
         return $this->snackRepository->FindAllSnacks();
     }
+
+    public function SnacksPrice($snack_name)
+    {
+        return $this->snackRepository->FindSnackPriceBySnackName($snack_name);
+    }
+
+    public function GetSnackId($snack_name)
+    {
+        return $this->snackRepository->FindSnackIdBySnackName($snack_name);
+    }
 }

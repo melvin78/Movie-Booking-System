@@ -12,4 +12,16 @@ class FastFoodRepository implements FastFoodRepositoryInterface
     {
         return FastFood::all();
     }
+
+    public function FindPriceByFastFoodName($fast_food_name)
+    {
+        return FastFood::where('description','=',$fast_food_name)
+            ->value('price');
+    }
+
+    public function FindIdByFastFoodName($fast_food_name)
+    {
+        return FastFood::where('description','=',$fast_food_name)
+            ->value('id');
+    }
 }

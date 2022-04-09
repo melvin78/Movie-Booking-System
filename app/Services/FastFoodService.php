@@ -20,4 +20,14 @@ class FastFoodService implements FastFoodServiceInterface
     {
         return $this->fastFoodRepository->FindAllFastFoods();
     }
+
+    public function GetFastFoodPrice($fast_food_name)
+    {
+        return $this->fastFoodRepository->FindPriceByFastFoodName($fast_food_name);
+    }
+
+    public function GetFastFoodId($fast_food_name)
+    {
+        return $this->fastFoodRepository->FindIdByFastFoodName($fast_food_name);
+    }
 }
