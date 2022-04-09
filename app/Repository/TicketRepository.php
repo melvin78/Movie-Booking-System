@@ -27,7 +27,7 @@ class TicketRepository implements TicketRepositoryInterface
 
     public function AddTickets(array $ticketDetails)
     {
-        // TODO: Implement AddTickets() method.
+
     }
 
     public function pdateTickets($ticketId, array $newDetails)
