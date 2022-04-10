@@ -42,3 +42,7 @@ Route::controller(\App\Http\Controllers\ShowTimeController::class)->group(functi
 Route::controller(\App\Http\Controllers\SnacksController::class)->group(function (){
     Route::get('/snacks','index');
 });
+
+Route::controller(\App\Http\Controllers\TicketsController::class)->group(function (){
+    Route::post('/book-ticket','create');
+});

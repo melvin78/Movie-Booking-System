@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TicketRequest;
 use App\Http\Resources\TicketsResource;
 use App\Interfaces\TicketServiceInterface;
 use App\Models\Tickets;
@@ -18,8 +19,26 @@ class TicketsController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
+     * @OA\Get(
+     *      path="/api/tickets",
+     *      operationId="getAllBookedTickets",
+     *      tags={"Ticket Information"},
+     *      summary="Get list of booked Tickets",
+     *      description="Returns list of tickets",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/TicketsResource")
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
      */
     public function index()
     {
@@ -27,13 +46,45 @@ class TicketsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @OA\Post(
+     *      path="/api/book-ticket",
+     *      operationId="saveTicket",
+     *      tags={"Ticket"},
+     *      summary="S",
+     *      description="Returns booked ticket",
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(ref="#/components/schemas/TicketRequest")
+     *      ),
+     *      @OA\Response(
+     *          response=201,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/Project")
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     * )
      */
-    public function create()
+    public function create(TicketRequest $ticketRequest)
     {
-        //
+        $valid_ticket_request = $ticketRequest->validated();
+
+        $response = $this->ticketService->BookTicket($valid_ticket_request);
+
+        return response()->json([
+           'ticketno' => $response['ticketnumber']
+        ]);
+
     }
 
     /**

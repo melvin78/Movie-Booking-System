@@ -25,6 +25,9 @@ class TicketRequest extends FormRequest
     {
         return [
 
+            'EmailAddress'=>'required',
+            'FirstName'=>'required',
+            'SecondName'=>'required'
         ];
     }
 }
