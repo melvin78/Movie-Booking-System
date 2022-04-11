@@ -7,7 +7,8 @@ use phpDocumentor\Reflection\Types\Integer;
 class GenerateTicketNumber
 {
 
-    public static function GenerateTicketNumber($cinema_short_code,$movie_short_code){
+    public static function GenerateTicketNumber($cinema_short_code,$movie_short_code): string
+    {
 
         $random_number =  sprintf("%06d", mt_rand(1, 999999));
 

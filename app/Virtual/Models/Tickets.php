@@ -22,7 +22,7 @@ class Tickets
      *
      * @var integer
      */
-    private $id;
+    private int $id;
     /**
      * @OA\Property(
      *     title="Created at",
@@ -58,7 +58,7 @@ class Tickets
      *
      * @var string
      */
-    public $movie_id;
+    public string $movie_id;
 
     /**
      * @OA\Property(
@@ -69,7 +69,7 @@ class Tickets
      *
      * @var string
      */
-    public $email_address;
+    public string $email_address;
 
     /**
      * @OA\Property(
@@ -81,7 +81,7 @@ class Tickets
      * @var string
      */
 
-    public $first_name;
+    public string $first_name;
 
     /**
      * @OA\Property(
@@ -92,7 +92,7 @@ class Tickets
      *
      * @var string
      */
-    public $second_name;
+    public string $second_name;
 
     /**
      * @OA\Property(
@@ -103,7 +103,7 @@ class Tickets
      *
      * @var string
      */
-    public $cinema_id;
+    public string $cinema_id;
 
 
     /**
@@ -115,7 +115,7 @@ class Tickets
      *
      * @var string
      */
-    public $show_time_id;
+    public string $show_time_id;
 
 
     /**
@@ -127,7 +127,7 @@ class Tickets
      *
      * @var string
      */
-    public $total_price;
+    public string $total_price;
 
     /**
      * @OA\Property(
@@ -138,7 +138,7 @@ class Tickets
      *
      * @var string
      */
-    public $ticketnumber;
+    public string $ticketnumber;
 
     public $offer_id;
 
@@ -151,7 +151,7 @@ class Tickets
      *
      * @var string
      */
-    public $drink_id;
+    public string $drink_id;
     /**
      * @OA\Property(
      *      title="Fast Food Ordered",
@@ -161,7 +161,7 @@ class Tickets
      *
      * @var string
      */
-    public $fastfood_id;
+    public string $fastfood_id;
 
     /**
      * @OA\Property(
@@ -173,7 +173,7 @@ class Tickets
      * @var string
      */
 
-    public $snack_id;
+    public string $snack_id;
 
 
     /**
@@ -186,7 +186,7 @@ class Tickets
      * @var string
      */
 
-    public $drink_quantity;
+    public string $drink_quantity;
 
 
     /**
@@ -198,7 +198,7 @@ class Tickets
      *
      * @var string
      */
-    public $fast_food_quantity;
+    public string $fast_food_quantity;
 
     /**
      * @OA\Property(
@@ -209,7 +209,7 @@ class Tickets
      *
      * @var string
      */
-    public $snack_quantity;
+    public string $snack_quantity;
 
 
 
