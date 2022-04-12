@@ -21,8 +21,8 @@ class SnacksResource
      *     description="Data wrapper"
      * )
      *
-     * @var Snacks
+     * @var Snacks[]
      */
 
-    public Snacks $data;
+    public array $data;
 }

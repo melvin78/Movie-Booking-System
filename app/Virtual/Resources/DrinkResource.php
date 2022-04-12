@@ -24,9 +24,9 @@ class DrinkResource
      *     description="Data wrapper"
      * )
      *
-     * @var Drink
+     * @var Drink[]
      */
 
-    private Drink $data;
+    private array $data;
 
 }

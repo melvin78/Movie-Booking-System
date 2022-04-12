@@ -24,10 +24,10 @@ class FastFoodResurce
      *     description="Data wrapper"
      * )
      *
-     * @var FastFood
+     * @var FastFood[]
      */
 
-    private FastFood $data;
+    private array $data;
 
 
 }

@@ -19,9 +19,9 @@ class GenreResource
  *     description="Data wrapper"
  * )
  *
- * @var Genre
+ * @var Genre[]
  */
 
-private Genre $data;
+private array $data;
 
 }

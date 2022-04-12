@@ -22,8 +22,8 @@ class ShowTimeResource
      *     description="Data wrapper"
      * )
      *
-     * @var ShowTime
+     * @var ShowTime[]
      */
 
-    public ShowTime $data;
+    public array $data;
 }

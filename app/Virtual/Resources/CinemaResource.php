@@ -21,8 +21,8 @@ class CinemaResource
      *     description="Data wrapper"
      * )
      *
-     * @var Cinemas
+     * @var Cinemas[]
      */
 
-    private Cinemas $data;
+    private array $data;
 }

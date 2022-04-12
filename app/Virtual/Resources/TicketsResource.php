@@ -19,8 +19,8 @@ class TicketsResource
      *     description="Data wrapper"
      * )
      *
-     * @var Tickets
+     * @var Tickets[]
      */
 
-    public Tickets $data;
+    public array $data;
 }

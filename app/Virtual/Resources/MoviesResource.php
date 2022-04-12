@@ -23,8 +23,8 @@ class MoviesResource
      *     description="Data wrapper"
      * )
      *
-     * @var Movies
+     * @var Movies[]
      */
 
-    private Movies $data;
+    private array $data;
 }
