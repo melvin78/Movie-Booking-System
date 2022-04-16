@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Virtual\Models;
+namespace App\Virtual\Requests;
+
 /**
  * @OA\Schema(
- *     title="Tickets",
- *     description="Tickets Model",
- *     @OA\Xml(
- *         name="Tickets"
- *     )
+ *      title="Book Tickets",
+ *      description="Wrapper for ticket request",
+ *      type="object",
  * )
  */
-class Tickets
+
+class TicketsRequest
 {
+
     /**
      * @OA\Property(
      *     title="ID",
@@ -166,7 +167,7 @@ class Tickets
     /**
      * @OA\Property(
      *      title="Snacks",
-     *      description="Snack Order",
+     *      description="Snack Ordere",
      *      example="Burger"
      * )
      *
@@ -210,7 +211,6 @@ class Tickets
      * @var string
      */
     public string $snack_quantity;
-
 
 
 

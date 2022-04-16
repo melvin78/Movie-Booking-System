@@ -1,18 +1,17 @@
 <?php
 
-namespace App\Virtual\Models;
-
+namespace App\Virtual\Requests;
 
 /**
  * @OA\Schema(
- *     title="Cinemas",
- *     description="Cinema model",
+ *     title="Drink",
+ *     description="Drink model",
  *     @OA\Xml(
- *         name="Cinema"
+ *         name="Drink"
  *     )
  * )
  */
-class Cinemas
+class CinemaRequest
 {
     /**
      * @OA\Property(
@@ -59,7 +58,7 @@ class Cinemas
     /**
      * @OA\Property(
      *      title="Cinema",
-     *      description=Name of the cinema,
+     *      description="Name of the cinema",
      *      example="Anga Cinema, Imax, "
      * )
      *
@@ -70,7 +69,7 @@ class Cinemas
     /**
      * @OA\Property(
      *      title="Location",
-     *      description=Physical address of the cinema,
+     *      description="Physical address of the cinema",
      *      example="Nairobi,Beijing, New York, London "
      * )
      *
@@ -101,6 +100,5 @@ class Cinemas
      * @var string
      */
     public string $short_code;
-
 
 }

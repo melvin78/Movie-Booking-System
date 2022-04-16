@@ -44,5 +44,5 @@ Route::controller(\App\Http\Controllers\SnacksController::class)->group(function
 });
 
 Route::controller(\App\Http\Controllers\TicketsController::class)->group(function (){
-    Route::post('/book-ticket','create');
+    Route::get('/book-ticket','create');
 });

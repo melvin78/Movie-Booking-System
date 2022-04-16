@@ -58,22 +58,36 @@ class TicketService implements TicketServiceInterface
         $movie_short_code= $this->movieService->MovieShortCode($ticket_details['movie_name']);
         $movie_id = $this->movieService->MovieId($ticket_details['movie_name']);
         $cinema_id= $this->cinemaService->GetCinemaId($ticket_details['cinema']);
+
+
         if(isset($ticket_details['snacks'])){
             $snack_price=$this->snackService->SnacksPrice($ticket_details['snacks']);
             $snack_id = $this->snackService->GetSnackId($ticket_details['snacks']);
+
+
         }
         if (isset($ticket_details['drinks'])){
             $drink_price= $this->drinkService->GetDrinkPrice($ticket_details['drinks']);
             $drink_id = $this->drinkService->GetDrinkId($ticket_details['drinks']);
+
+
         }
 
         if (isset($ticket_details['fast_food'])){
             $fast_food_price= $this->fastFoodService->GetFastFoodPrice($ticket_details['fast_food']);
             $fast_food_id = $this->fastFoodService->GetFastFoodId($ticket_details['fast_food']);
+
+
         }
 
         $ticket_price= $this->showTimeService->GetMovieTicketPrice($ticket_details['time_from'],$ticket_details['time_to']);
+
         $ticket_number= GenerateTicketNumber::GenerateTicketNumber($cinema_short_code,$movie_short_code);
+
+        $total_price= CalculateTotalPrice::TotalPrice($ticket_price,$drink_price,
+            $snack_price,$fast_food_price,$ticket_details['drinks_quantity'],
+            $ticket_details['snacks_quantity'],$ticket_details['fast_food_quantity']);
+
 
         $save_ticket_details=
             [
@@ -83,18 +97,17 @@ class TicketService implements TicketServiceInterface
                 "second_name"=>$ticket_details['second_name'],
                 "cinema_id"=>$cinema_id,
                 "show_time_id"=>$showtime_id,
-                "total_price"=>CalculateTotalPrice::TotalPrice($ticket_price,$drink_price,
-                    $snack_price,$fast_food_price,$ticket_details['drinks_quantity'],
-                    $ticket_details['snacks_quantity'],$ticket_details['fast_food_quantity']),
+                "total_price"=>$total_price,
                 "ticketnumber"=>$ticket_number,
                 "drink_id"=>$drink_id,
-                "fast_food_id"=>$fast_food_id,
+                "fastfood_id"=>$fast_food_id,
                 "snack_id"=>$snack_id,
                 "drink_quantity"=>$ticket_details['drinks_quantity'],
                 "fast_food_quantity"=>$ticket_details['fast_food_quantity'],
                 "snack_quantity"=>$ticket_details['snacks_quantity'],
 
             ];
+
 
         return $this->ticketRepository->AddTickets($save_ticket_details);
 

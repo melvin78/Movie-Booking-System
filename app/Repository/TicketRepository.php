@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Interfaces\TicketRepositoryInterface;
+use App\Models\TicketEntity;
 use App\Models\Tickets;
 
 class TicketRepository implements TicketRepositoryInterface
@@ -28,7 +29,7 @@ class TicketRepository implements TicketRepositoryInterface
     public function AddTickets(array $ticketDetails)
     {
 
-        return Tickets::create($ticketDetails);
+        return TicketEntity::create($ticketDetails);
     }
 
     public function pdateTickets($ticketId, array $newDetails)

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Virtual\Models;
+namespace App\Virtual\Requests;
 
 /**
  * @OA\Schema(
@@ -11,11 +11,8 @@ namespace App\Virtual\Models;
  *     )
  * )
  */
-
-
-class Drink
+class DrinksRequest
 {
-
     /**
      * @OA\Property(
      *     title="ID",

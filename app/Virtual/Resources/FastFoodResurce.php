@@ -10,7 +10,7 @@ use App\Virtual\Models\FastFood;
  *     title="FastFood Resource",
  *     description="Fast Food Resource",
  *     @OA\Xml(
- *         name="Fast Fooo Resource"
+ *         name="Fast Food Resource"
  *     )
  * )
  */

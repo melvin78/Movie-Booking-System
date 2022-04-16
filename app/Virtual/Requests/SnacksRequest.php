@@ -1,21 +1,16 @@
 <?php
 
-namespace App\Virtual\Models;
+namespace App\Virtual\Requests;
 
 /**
  * @OA\Schema(
- *     title="Drink",
- *     description="Drink model",
- *     @OA\Xml(
- *         name="Drink"
- *     )
+ *      title="Snacks Tickets",
+ *      description="Wrapper for snacks request",
+ *      type="object",
  * )
  */
-
-
-class Drink
+class SnacksRequest
 {
-
     /**
      * @OA\Property(
      *     title="ID",

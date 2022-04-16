@@ -1,21 +1,18 @@
 <?php
 
-namespace App\Virtual\Models;
+namespace App\Virtual\Requests;
 
 /**
  * @OA\Schema(
- *     title="Drink",
- *     description="Drink model",
+ *     title="ShowTime Request",
+ *     description="ShowTime",
  *     @OA\Xml(
- *         name="Drink"
+ *         name="ShowTime"
  *     )
  * )
  */
-
-
-class Drink
+class ShowTimeRequest
 {
-
     /**
      * @OA\Property(
      *     title="ID",
@@ -55,26 +52,30 @@ class Drink
      */
     private \DateTime $updated_at;
 
-    /**
-     * @OA\Property(
-     *      title="Drink",
-     *      description="Name of the drink",
-     *      example="Pepsi,Coca Cola"
-     * )
-     *
-     * @var string
-     */
-    private string $description;
 
     /**
      * @OA\Property(
-     *     title="Price",
-     *     description="Price of drink",
-     *     format="float",
-     *     example=1.05
+     *     title="Start Time",
+     *     description="Start Time of Movie",
+     *     example="17:00",
+     *     format="datetime",
+     *     type="string"
      * )
      *
-     * @var float
+     * @var \DateTime
      */
-    private float $price;
+    public \DateTime $time_from;
+
+    /**
+     * @OA\Property(
+     *     title="End Time",
+     *     description="End Time of Movie",
+     *     example="21:00",
+     *     format="datetime",
+     *     type="string"
+     * )
+     *
+     * @var \DateTime
+     */
+    public \DateTime $time_to;
 }

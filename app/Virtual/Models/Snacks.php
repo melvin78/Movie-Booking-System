@@ -54,7 +54,7 @@ class Snacks
     /**
      * @OA\Property(
      *      title="Drink",
-     *      description=Name of the drink,
+     *      description="Name of the drink",
      *      example="Pepsi,Coca Cola"
      * )
      *

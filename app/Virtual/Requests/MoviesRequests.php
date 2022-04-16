@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Virtual\Models;
+namespace App\Virtual\Requests;
 
 
 /**
  * @OA\Schema(
- *     title="Movies",
- *     description="Movies",
+ *     title="Movies Request",
+ *     description="Movies Request",
  *     @OA\Xml(
  *         name="Movies"
  *     )
  * )
  */
-class Movies
+class MoviesRequests
 {
-
     /**
      * @OA\Property(
      *     title="ID",
@@ -105,7 +104,7 @@ class Movies
      *     title="tomato score",
      *     description="movies tomato score on tomatometer",
      *     format="int64",
-     *     example="98"
+     *     example=98
      * )
      *
      * @var integer
@@ -114,7 +113,7 @@ class Movies
 
     /**
      * @OA\Property(
-         *     title="Parent Id",
+     *     title="Parent Id",
      *     description="If value is set represents the prequel to the current movie",
      *     format="int64",
      *     example=4
@@ -146,7 +145,7 @@ class Movies
      *
      * @var integer
      */
-    public int $genre_id;
+    public $genre_id;
 
     /**
      * @OA\Property(
@@ -170,5 +169,4 @@ class Movies
      * @var string
      */
     public string $short_code;
-
 }

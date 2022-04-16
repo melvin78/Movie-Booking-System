@@ -18,82 +18,43 @@ class TicketsController extends Controller
         $this->ticketService = $ticketService;
     }
 
-    /**
-     * @OA\Get(
-     *      path="/api/tickets",
-     *      operationId="getAllBookedTickets",
-     *      tags={"Ticket Information"},
-     *      summary="Get list of booked Tickets",
-     *      description="Returns list of tickets",
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *          @OA\JsonContent(ref="#/components/schemas/TicketsResource")
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      )
-     *     )
-     */
+
     public function index()
     {
         return TicketsResource::collection($this->ticketService->RetrieveAllTickets());
     }
 
-    /**
-     * @OA\Post(
-     *      path="/api/book-ticket",
-     *      operationId="saveTicket",
-     *      tags={"Ticket"},
-     *      summary="S",
-     *      description="Returns booked ticket",
-     *      @OA\RequestBody(
-     *          required=true,
-     *          @OA\JsonContent(ref="#/components/schemas/TicketRequest")
-     *      ),
-     *      @OA\Response(
-     *          response=201,
-     *          description="Successful operation",
-     *          @OA\JsonContent(ref="#/components/schemas/Project")
-     *       ),
-     *      @OA\Response(
-     *          response=400,
-     *          description="Bad Request"
-     *      ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      )
-     * )
-     */
-    public function create(TicketRequest $ticketRequest)
+    public function create()
     {
-        $valid_ticket_request = $ticketRequest->validated();
+        $valid_ticket_request =
+            [
+                "movie_name"=>"Morbius",
+                "email_address"=>"Melvin@gmail.com",
+                "first_name"=>"melvin",
+                "second_name"=>"ochieng",
+                "cinema"=>"Anga Cinemas",
+                "time_from"=>"08:00:00",
+                "time_to"=>"10:00:00",
+                "drinks"=>"pepsi",
+                "snacks"=>"biscuits",
+                "fast_food"=>"burger",
+                "drinks_quantity"=>1,
+                "snacks_quantity"=>2,
+                "fast_food_quantity"=>3
+            ];
 
         $response = $this->ticketService->BookTicket($valid_ticket_request);
 
-        return response()->json([
-           'ticketno' => $response['ticketnumber']
-        ]);
+        dd($response);
+
+//        return response()->json([
+//           'ticketno' => $response['ticketnumber']
+//        ]);
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreTicketsRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreTicketsRequest $request)
+
+    public function store(TicketRequest $request)
     {
         //
     }
@@ -120,24 +81,13 @@ class TicketsController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateTicketsRequest  $request
-     * @param  \App\Models\Tickets  $tickets
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateTicketsRequest $request, Tickets $tickets)
+
+    public function update(TicketRequest $request, Tickets $tickets)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Tickets  $tickets
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Tickets $tickets)
     {
         //

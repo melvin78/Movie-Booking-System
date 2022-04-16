@@ -1,21 +1,18 @@
 <?php
 
-namespace App\Virtual\Models;
+namespace App\Virtual\Requests;
 
 /**
  * @OA\Schema(
- *     title="Drink",
- *     description="Drink model",
+ *     title="Fast Food",
+ *     description="Fast Food Request",
  *     @OA\Xml(
- *         name="Drink"
+ *         name="Fast Food"
  *     )
  * )
  */
-
-
-class Drink
+class FastFoodRequests
 {
-
     /**
      * @OA\Property(
      *     title="ID",
@@ -57,9 +54,9 @@ class Drink
 
     /**
      * @OA\Property(
-     *      title="Drink",
-     *      description="Name of the drink",
-     *      example="Pepsi,Coca Cola"
+     *      title="Fast Food",
+     *      description="Name of fastfood",
+     *      example="Burger,Fries,Sausages"
      * )
      *
      * @var string
@@ -68,8 +65,8 @@ class Drink
 
     /**
      * @OA\Property(
-     *     title="Price",
-     *     description="Price of drink",
+     *     title="Fast food",
+     *     description="Price of fast food",
      *     format="float",
      *     example=1.05
      * )
