@@ -45,11 +45,11 @@ class TicketsController extends Controller
 
         $response = $this->ticketService->BookTicket($valid_ticket_request);
 
-        dd($response);
 
-//        return response()->json([
-//           'ticketno' => $response['ticketnumber']
-//        ]);
+
+        return response()->json([
+           'ticketno' => $response['ticketnumber']
+        ]);
 
     }
 
