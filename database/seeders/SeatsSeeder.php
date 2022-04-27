@@ -21,7 +21,8 @@ class SeatsSeeder extends Seeder
             for($j = 0; $j <count($columns);$j++){
                 DB::table('seats')->insert([
                     'seat_number'=>$rows[$i].$columns[$j],
-                    'cinema_id'=> 4
+                    'cinema_id'=> 1,
+                    'isBooked'=>false
                 ]);
             }
         }
