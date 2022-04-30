@@ -2,48 +2,60 @@
 
 namespace App\Services;
 
+use App\Interfaces\SeatRepositoryInterface;
 use App\Interfaces\SeatServiceInterface;
+use function Symfony\Component\Translation\t;
 
 class SeatService implements SeatServiceInterface
 {
+    private SeatRepositoryInterface $seatRepository;
+
+    public function __construct(SeatRepositoryInterface $seatRepository)
+    {
+
+        $this->seatRepository = $seatRepository;
+    }
 
     public function SeatsAvailableByCinema($cinema_id)
     {
-        // TODO: Implement SeatsAvailableByCinema() method.
+        return $this->seatRepository->FindSeatsAvailableByCinemaId($cinema_id);
     }
 
     public function SeatsUnavailableByCinema($cinema_id)
     {
-        // TODO: Implement SeatsUnavailableByCinema() method.
+        return $this->seatRepository->FindSeatsUnavailableByCinemaId($cinema_id);
     }
 
     public function AllSeats()
     {
-        // TODO: Implement AllSeats() method.
+
+        return $this->seatRepository->FindAllSeats();
     }
 
     public function MakeAllSeatsAvailableByCinema($cinema_id)
     {
-        // TODO: Implement MakeAllSeatsAvailableByCinema() method.
+        return $this->seatRepository->UnSetSeatsIsBookedByCinema($cinema_id);
     }
 
     public function MakeSeatAvailableByCinema($cinema_id, $seat_no)
     {
-        // TODO: Implement MakeSeatAvailableByCinema() method.
+        return $this->seatRepository->UnSetSeatIsBookedByCinema($cinema_id,$seat_no);
     }
 
     public function BookSeat($cinema_id, $seatno)
     {
-        // TODO: Implement BookSeat() method.
+
+        return $this->seatRepository->SetSeatIsBooked($cinema_id,$seatno);
     }
 
     public function MakeAllSeatsUnavailable()
     {
-        // TODO: Implement MakeAllSeatsUnavailable() method.
+        return $this->seatRepository->SetSeatsIsBooked();
     }
 
     public function MakeAllSeatsAvailable()
     {
-        // TODO: Implement MakeAllSeatsAvailable() method.
+
+        return $this->seatRepository->UnSetSeatsIsBooked();
     }
 }

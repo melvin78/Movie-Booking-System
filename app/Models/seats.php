@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class seats extends Model
 {
     use HasFactory;
+
+
 }
