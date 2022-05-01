@@ -76,4 +76,11 @@ class SeatRepository implements SeatRepositoryInterface
                 "isBooked"=>1
             ]);
     }
+
+    public function FindSeatIdBySeatNameAndCinemaId($cinema_id, $seat_id)
+    {
+       return seats::where('cinema_id','=',$cinema_id)
+           ->where('seat_number','=',$seat_id)
+           ->value('id');
+    }
 }

@@ -7,6 +7,7 @@ use App\Interfaces\CinemaServiceInterface;
 use App\Interfaces\DrinkServiceInterface;
 use App\Interfaces\FastFoodServiceInterface;
 use App\Interfaces\MovieServiceInterface;
+use App\Interfaces\SeatServiceInterface;
 use App\Interfaces\ShowTimeServiceInterface;
 use App\Interfaces\SnackServiceInterface;
 use App\Interfaces\TicketServiceInterface;
@@ -25,6 +26,7 @@ class TicketService implements TicketServiceInterface
     private DrinkServiceInterface $drinkService;
     private FastFoodService $fastFoodService;
     private MovieServiceInterface $movieService;
+    private SeatServiceInterface $seatService;
 
     public function __construct(TicketRepository         $ticketRepository,
                                 ShowTimeServiceInterface $showTimeService,
@@ -32,6 +34,7 @@ class TicketService implements TicketServiceInterface
                                 SnackServiceInterface    $snackService,
                                 DrinkServiceInterface    $drinkService,
                                 FastFoodServiceInterface $fastFoodService,
+                                SeatServiceInterface $seatService,
                                 MovieServiceInterface    $movieService)
     {
 
@@ -42,6 +45,7 @@ class TicketService implements TicketServiceInterface
         $this->drinkService = $drinkService;
         $this->fastFoodService = $fastFoodService;
         $this->movieService = $movieService;
+        $this->seatService = $seatService;
     }
 
 
@@ -58,6 +62,7 @@ class TicketService implements TicketServiceInterface
         $movie_short_code= $this->movieService->MovieShortCode($ticket_details['movie_name']);
         $movie_id = $this->movieService->MovieId($ticket_details['movie_name']);
         $cinema_id= $this->cinemaService->GetCinemaId($ticket_details['cinema']);
+        $seat_id = $this->seatService->GetSeatIdentity($cinema_id,$ticket_details['seat_number']);
 
 
         if(isset($ticket_details['snacks'])){
@@ -104,6 +109,7 @@ class TicketService implements TicketServiceInterface
                 "snack_id"=>$snack_id,
                 "drink_quantity"=>$ticket_details['drinks_quantity'],
                 "fast_food_quantity"=>$ticket_details['fast_food_quantity'],
+                "seat_id"=>$seat_id,
                 "snack_quantity"=>$ticket_details['snacks_quantity'],
 
             ];
