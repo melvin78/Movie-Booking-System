@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CinemaSeatsRequest;
 use App\Http\Resources\SeatsResource;
 use App\Models\seats;
 use App\Http\Requests\StoreseatsRequest;
@@ -24,13 +25,13 @@ class SeatsController extends Controller
      *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index()
+    public function index(CinemaSeatsRequest $cinemaSeatsRequest)
     {
 
-        return \response()->json([
-            "res" => $this->seatService->MakeAllSeatsAvailableByCinema(1)
-        ]);
-//        return SeatsResource::collection($this->seatService->BookSeat(1,'A1'));
+        $validated = $cinemaSeatsRequest->validated();
+
+
+        return SeatsResource::collection($this->seatService->SeatsAvailableByCinema($validated["CinemaId"]));
     }
 
     /**

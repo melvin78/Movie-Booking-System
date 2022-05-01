@@ -49,5 +49,5 @@ Route::controller(\App\Http\Controllers\TicketsController::class)->group(functio
 
 
 Route::controller(\App\Http\Controllers\SeatsController::class)->group(function (){
-    Route::get('/seats','index');
+    Route::post('/seats-available','index');
 });
