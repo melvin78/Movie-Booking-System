@@ -10,6 +10,8 @@ use App\Interfaces\FastFoodRepositoryInterface;
 use App\Interfaces\FastFoodServiceInterface;
 use App\Interfaces\MovieRepositoryInterface;
 use App\Interfaces\MovieServiceInterface;
+use App\Interfaces\SeatRepositoryInterface;
+use App\Interfaces\SeatServiceInterface;
 use App\Interfaces\ShowTimeRepositoryInterface;
 use App\Interfaces\ShowTimeServiceInterface;
 use App\Interfaces\SnackRepositoryInterface;
@@ -20,6 +22,7 @@ use App\Repository\CinemaRepository;
 use App\Repository\DrinkRepository;
 use App\Repository\FastFoodRepository;
 use App\Repository\MovieRepository;
+use App\Repository\SeatRepository;
 use App\Repository\ShowTimeRepository;
 use App\Repository\SnackRepository;
 use App\Repository\TicketRepository;
@@ -27,6 +30,7 @@ use App\Services\CinemaService;
 use App\Services\DrinkService;
 use App\Services\FastFoodService;
 use App\Services\MoviesService;
+use App\Services\SeatService;
 use App\Services\ShowTimeService;
 use App\Services\SnacksService;
 use App\Services\TicketService;
@@ -49,6 +53,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ShowTimeRepositoryInterface::class,ShowTimeRepository::class);
         $this->app->bind(SnackRepositoryInterface::class,SnackRepository::class);
         $this->app->bind(DrinkRepositoryInterface::class,DrinkRepository::class);
+        $this->app->bind(SeatRepositoryInterface::class,SeatRepository::class);
 
 
         //->services
@@ -59,6 +64,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(SnackServiceInterface::class,SnacksService::class);
         $this->app->bind(TicketServiceInterface::class,TicketService::class);
         $this->app->bind(DrinkServiceInterface::class,DrinkService::class);
+        $this->app->bind(SeatServiceInterface::class,SeatService::class);
     }
 
     /**
