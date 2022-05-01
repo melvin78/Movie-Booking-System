@@ -2,25 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\SeatsResource;
 use App\Models\seats;
 use App\Http\Requests\StoreseatsRequest;
 use App\Http\Requests\UpdateseatsRequest;
+use App\Services\SeatService;
+use http\Env\Response;
 
 class SeatsController extends Controller
 {
 
-    public function __construct()
+    private SeatService $seatService;
+
+    public function __construct(SeatService $seatService)
     {
+        $this->seatService = $seatService;
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
-        //
+
+        return \response()->json([
+            "res" => $this->seatService->MakeAllSeatsAvailableByCinema(1)
+        ]);
+//        return SeatsResource::collection($this->seatService->BookSeat(1,'A1'));
     }
 
     /**

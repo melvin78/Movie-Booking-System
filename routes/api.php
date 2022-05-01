@@ -46,3 +46,8 @@ Route::controller(\App\Http\Controllers\SnacksController::class)->group(function
 Route::controller(\App\Http\Controllers\TicketsController::class)->group(function (){
     Route::get('/book-ticket','create');
 });
+
+
+Route::controller(\App\Http\Controllers\SeatsController::class)->group(function (){
+    Route::get('/seats','index');
+});

@@ -44,27 +44,36 @@ class SeatRepository implements SeatRepositoryInterface
         ]);
     }
 
-    public function SetSeatIsBooked($cinema_id, $seat_no)
+
+
+    public function SetSeatsIsBooked()
+    {
+
+        return seats::where('id','>',0)->update([
+            "isBooked"=> 1
+        ]);
+    }
+
+    public function UnSetSeatsIsBooked()
+    {
+        return seats::where('id','>',0)->update([
+            "isBooked"=>0
+        ]);
+    }
+
+    public function SetSeatsIsBookedByCinema($cinema_id)
+    {
+        return seats::where('cinema_id','=',$cinema_id)->update([
+            "isBooked"=>1
+        ]);
+    }
+
+    public function SetSeatIsBookedByCinema($cinema_id, $seat_no)
     {
         return seats::where('cinema_id','=',$cinema_id)
             ->where('seat_number','=',$seat_no)
             ->update([
                 "isBooked"=>1
             ]);
-    }
-
-    public function SetSeatsIsBooked()
-    {
-
-        return seats::all()->update([
-            "isBooked"=>1
-        ]);
-    }
-
-    public function UnSetSeatsIsBooked()
-    {
-        return seats::all()->update([
-            "isBooked"=>0
-        ]);
     }
 }

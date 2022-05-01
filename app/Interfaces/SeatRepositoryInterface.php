@@ -15,7 +15,9 @@ interface SeatRepositoryInterface
 
     public function UnSetSeatIsBookedByCinema($cinema_id,$seat_no);
 
-    public function SetSeatIsBooked($cinema_id,$seat_no);
+    public function SetSeatsIsBookedByCinema($cinema_id);
+
+    public function SetSeatIsBookedByCinema($cinema_id,$seat_no);
 
     public function SetSeatsIsBooked();
 
