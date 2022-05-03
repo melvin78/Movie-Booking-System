@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use phpDocumentor\Reflection\Types\Array_;
 
 class SeatsResource extends JsonResource
 {
@@ -14,6 +15,14 @@ class SeatsResource extends JsonResource
      */
     public function toArray($request)
     {
+//        return [
+//            'row'=>[
+//
+//            ]
+//        ];
+
+
+
         return parent::toArray($request);
     }
 }
