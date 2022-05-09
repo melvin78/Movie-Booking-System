@@ -11,6 +11,8 @@ interface SeatServiceInterface
 
     public function AllSeats();
 
+    public function AllSeatsByCinemaId($cinema_id);
+
     public function MakeAllSeatsAvailableByCinema($cinema_id);
 
     public function MakeAllSeatsUnAvailableByCinema($cinema_id);

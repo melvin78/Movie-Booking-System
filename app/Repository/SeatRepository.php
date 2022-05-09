@@ -93,4 +93,19 @@ class SeatRepository implements SeatRepositoryInterface
             ->where('seat_number', '=', $seat_id)
             ->value('id');
     }
+
+    public function FindAllSeatsBySeatId($cinema_id)
+    {
+        $finalInfo = [];
+
+        $seatsInfo = seats::where('cinema_id', '=', $cinema_id)
+            ->get()
+            ->chunk(49);
+
+        for ($i = 0; $i <= 2; $i++) {
+            $finalInfo[] = $seatsInfo[$i]->chunk(7);
+        }
+
+        return $finalInfo;
+    }
 }
