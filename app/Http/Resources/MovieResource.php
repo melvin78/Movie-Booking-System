@@ -22,8 +22,12 @@ class MovieResource extends JsonResource
             'MovieStudio'=> $this->movie_studio,
             'MovieDesc'=> $this->movie_short_description,
             'genre'=> $this->genres,
-            'rating'=> $this->youtube,
-            'youtube'=> $this->image_location
+            'rating'=> [
+                'tomato'=> $this->tomato_meter,
+                'imdb' =>  $this->imdb_rating
+             ],
+            'youtube'=>$this->youtube
+
         ];
     }
 }
