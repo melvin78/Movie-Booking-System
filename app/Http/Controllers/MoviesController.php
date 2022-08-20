@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\MoviePlotAndRuntimeResource;
 use App\Http\Resources\MovieResource;
 use App\Interfaces\MovieServiceInterface;
 use App\Models\Movies;
@@ -21,6 +22,10 @@ class MoviesController extends Controller
     public function index()
     {
         return MovieResource::collection($this->movieService->MoviesCurrentlyShowing());
+    }
+
+    public function plotruntime($id){
+        return MoviePlotAndRuntimeResource::collection($this->movieService->MovieRuntimeAndPlot($id));
     }
 
     /**

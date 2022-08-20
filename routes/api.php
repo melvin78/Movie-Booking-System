@@ -27,6 +27,10 @@ Route::controller(\App\Http\Controllers\MoviesController::class)->group(function
     Route::get('/movies','index');
 });
 
+Route::controller(\App\Http\Controllers\MoviesController::class)->group(function (){
+    Route::get('/plot/{id}','plotruntime');
+});
+
 Route::controller(\App\Http\Controllers\CinemasController::class)->group(function (){
     Route::get('/cinemas','index');
 });

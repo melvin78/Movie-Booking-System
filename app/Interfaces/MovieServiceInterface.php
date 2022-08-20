@@ -10,4 +10,6 @@ interface MovieServiceInterface
     public function MovieShortCode($movie_name);
 
     public function MovieId($movie_name);
+
+    public function MovieRuntimeAndPlot ($movie_id);
 }

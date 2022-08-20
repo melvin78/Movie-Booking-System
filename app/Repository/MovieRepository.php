@@ -23,4 +23,9 @@ class MovieRepository implements MovieRepositoryInterface
     {
         return Movies::where('movie_name','=',$movie_name)->value('id');
     }
+
+    public function FindMoviePlotAndRuntime($movie_id)
+    {
+        return Movies::where('id',$movie_id)->get();
+    }
 }
