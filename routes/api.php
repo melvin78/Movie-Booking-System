@@ -23,6 +23,10 @@ Route::controller(\App\Http\Controllers\TicketsController::class)->group(functio
     Route::get('/tickets','index');
 });
 
+Route::controller(\App\Http\Controllers\MoviesController::class)->group(function (){
+    Route::get('/movies','index');
+});
+
 Route::controller(\App\Http\Controllers\CinemasController::class)->group(function (){
     Route::get('/cinemas','index');
 });
