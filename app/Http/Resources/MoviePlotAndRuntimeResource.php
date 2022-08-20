@@ -18,6 +18,8 @@ class MoviePlotAndRuntimeResource extends JsonResource
 
             'runtime'=> $this->running_time,
             'plot'=> $this->plot,
+            'image'=>$this->image_location,
+            'moviename'=>$this->movie_name
 
 
         ];
