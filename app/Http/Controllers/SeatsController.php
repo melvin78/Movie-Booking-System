@@ -34,6 +34,8 @@ class SeatsController extends Controller
         return SeatsResource::collection($this->seatService->AllSeatsByCinemaId($validated["CinemaId"]));
     }
 
+
+
     /**
      * Show the form for creating a new resource.
      *

@@ -94,7 +94,7 @@ class SeatRepository implements SeatRepositoryInterface
             ->value('id');
     }
 
-    public function FindAllSeatsBySeatId($cinema_id)
+    public function FindAllSeatsByCinemaId($cinema_id)
     {
         $finalInfo = [];
 

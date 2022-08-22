@@ -72,6 +72,6 @@ class SeatService implements SeatServiceInterface
 
     public function AllSeatsByCinemaId($cinema_id)
     {
-      return $this->seatRepository->FindAllSeatsBySeatId($cinema_id);
+      return $this->seatRepository->FindAllSeatsByCinemaId($cinema_id);
     }
 }

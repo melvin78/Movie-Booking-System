@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\CinemaResource;
+use App\Http\Resources\MoviePlotAndRuntimeResource;
 use App\Interfaces\CinemaServiceInterface;
 use App\Models\Cinemas;
 use App\Http\Requests\StoreCinemasRequest;
@@ -28,6 +29,11 @@ class CinemasController extends Controller
         return CinemaResource::collection($this->cinemaService->RetrieveCinemas());
     }
 
+
+    public function cinemaname($id){
+
+        return $this->cinemaService->GetCinemaName($id);
+    }
     /**
      * Show the form for creating a new resource.
      *

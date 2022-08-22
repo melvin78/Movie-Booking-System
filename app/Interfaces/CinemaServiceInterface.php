@@ -10,4 +10,6 @@ interface CinemaServiceInterface
     public function GetCinemaShortCode($cinema_name);
 
     public function GetCinemaId($cinema_name);
+
+    public function GetCinemaName ($cinema_id);
 }

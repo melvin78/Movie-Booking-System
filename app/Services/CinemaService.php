@@ -34,4 +34,9 @@ class CinemaService implements CinemaServiceInterface
 
         return $this->cinemaRepository->FindCinemaById($cinema_name);
     }
+
+    public function GetCinemaName($cinema_id)
+    {
+        return $this->cinemaRepository->FindCinemaNameByCinemaId($cinema_id);
+    }
 }

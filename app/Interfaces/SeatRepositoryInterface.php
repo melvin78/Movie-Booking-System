@@ -11,7 +11,7 @@ interface SeatRepositoryInterface
 
     public function FindAllSeats();
 
-    public function FindAllSeatsBySeatId($cinema_id);
+    public function FindAllSeatsByCinemaId($cinema_id);
 
     public function UnSetSeatsIsBookedByCinema($cinema_id);
 

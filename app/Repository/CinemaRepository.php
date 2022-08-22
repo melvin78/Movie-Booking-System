@@ -22,4 +22,9 @@ class CinemaRepository implements CinemaRepositoryInterface
     {
         return Cinemas::where('cinema','=',$cinema_name)->value('id');
     }
+
+    public function FindCinemaNameByCinemaId($cinema_id)
+    {
+        return Cinemas::where('id','=',$cinema_id)->value('cinema');
+    }
 }
