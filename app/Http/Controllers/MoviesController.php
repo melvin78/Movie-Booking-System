@@ -28,6 +28,11 @@ class MoviesController extends Controller
         return MoviePlotAndRuntimeResource::collection($this->movieService->MovieRuntimeAndPlot($id));
     }
 
+    public function movieprice($id){
+
+        return $this->movieService->MoviePrice($id);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

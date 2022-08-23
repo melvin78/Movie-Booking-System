@@ -12,4 +12,6 @@ interface MovieServiceInterface
     public function MovieId($movie_name);
 
     public function MovieRuntimeAndPlot ($movie_id);
+
+    public function MoviePrice ($movie_id);
 }

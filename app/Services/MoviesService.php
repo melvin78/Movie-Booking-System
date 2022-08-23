@@ -35,4 +35,9 @@ class MoviesService implements MovieServiceInterface
     {
        return $this->movieRepository->FindMoviePlotAndRuntime($movie_id);
     }
+
+    public function MoviePrice($movie_id)
+    {
+        return $this->movieRepository->FindMoviePrice($movie_id);
+    }
 }

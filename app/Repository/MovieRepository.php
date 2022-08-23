@@ -28,4 +28,9 @@ class MovieRepository implements MovieRepositoryInterface
     {
         return Movies::where('id',$movie_id)->get();
     }
+
+    public function FindMoviePrice($movie_id)
+    {
+        return Movies::where('id',$movie_id)->value('price');
+    }
 }

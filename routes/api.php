@@ -25,19 +25,18 @@ Route::controller(\App\Http\Controllers\TicketsController::class)->group(functio
 
 Route::controller(\App\Http\Controllers\MoviesController::class)->group(function (){
     Route::get('/movies','index');
+    Route::get('/plot/{id}','plotruntime');
+    Route::get('/movie-price/{id}','movieprice');
 });
 
-Route::controller(\App\Http\Controllers\MoviesController::class)->group(function (){
-    Route::get('/plot/{id}','plotruntime');
-});
+
 
 Route::controller(\App\Http\Controllers\CinemasController::class)->group(function (){
     Route::get('/cinemaname/{id}','cinemaname');
-});
-
-Route::controller(\App\Http\Controllers\CinemasController::class)->group(function (){
     Route::get('/cinemas','index');
 });
+
+
 
 Route::controller(\App\Http\Controllers\DrinkController::class)->group(function (){
     Route::get('/drinks','index');
@@ -49,6 +48,10 @@ Route::controller(\App\Http\Controllers\FastFoodController::class)->group(functi
 
 Route::controller(\App\Http\Controllers\ShowTimeController::class)->group(function (){
     Route::get('/show-time','index');
+});
+
+Route::controller(\App\Http\Controllers\ShowDatesController::class)->group(function (){
+    Route::get('/show-date','index');
 });
 
 Route::controller(\App\Http\Controllers\SnacksController::class)->group(function (){
