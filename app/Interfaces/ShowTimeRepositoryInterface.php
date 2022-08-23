@@ -10,4 +10,6 @@ interface ShowTimeRepositoryInterface
     public function FindShowTimeByShowTimeStartDateAndShowTimeEndDate($time_from,$time_to);
 
     public function FindPriceByShowTimeStartDateAndShowTimeEndDate($time_from,$time_to);
+
+    public function FindShowTimes();
 }

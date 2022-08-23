@@ -27,4 +27,9 @@ class ShowTimeRepository implements ShowTimeRepositoryInterface
             ->whereTime('time_to','=',$time_to)
             ->value('price');
     }
+
+    public function FindShowTimes()
+    {
+        return ShowTime::all();
+    }
 }
