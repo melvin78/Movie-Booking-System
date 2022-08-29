@@ -31,7 +31,7 @@ class SeatsController extends Controller
         $validated = $cinemaSeatsRequest->validated();
 
 
-        return SeatsResource::collection($this->seatService->AllSeatsByCinemaId($validated["CinemaId"]));
+        return SeatsResource::collection($this->seatService->AllSeatsAvailableByShowTimeAndCinemaId($validated["CinemaId"],$validated['ShowTimeId']));
     }
 
 

@@ -85,4 +85,9 @@ class SeatService implements SeatServiceInterface
 
         return $this->seatRepository->SetSeatIsBookedByCinema($cinema_id,$seat_no);
     }
+
+    public function AllSeatsAvailableByShowTimeAndCinemaId($cinema_id, $show_time_id)
+    {
+        return $this->seatRepository->FindAllSeatsByCinemaIdAndShowTimeID($cinema_id,$show_time_id);
+    }
 }

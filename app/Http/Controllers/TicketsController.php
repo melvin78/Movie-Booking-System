@@ -44,9 +44,7 @@ class TicketsController extends Controller
         }
 
 
-        return response()->json([
-            'ticketno' => $generatedTicketNumbers
-        ]);
+        return response()->json($generatedTicketNumbers);
 
     }
 

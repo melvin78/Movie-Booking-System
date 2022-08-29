@@ -31,6 +31,8 @@ interface SeatServiceInterface
 
     public function MakeSeatUnavailable($cinema_id,$seat_no);
 
+    public function AllSeatsAvailableByShowTimeAndCinemaId ($cinema_id,$show_time_id);
+
 
 
 
