@@ -85,13 +85,13 @@ class TicketService implements TicketServiceInterface
 
         }
 
-        $ticket_price= $this->showTimeService->GetMovieTicketPrice($ticket_details['time_from'],$ticket_details['time_to']);
+        $ticket_price= $this->movieService->MoviePrice($movie_id);
 
         $ticket_number= GenerateTicketNumber::GenerateTicketNumber($cinema_short_code,$movie_short_code);
 
-        $total_price= CalculateTotalPrice::TotalPrice($ticket_price,$drink_price,
-            $snack_price,$fast_food_price,$ticket_details['drinks_quantity'],
-            $ticket_details['snacks_quantity'],$ticket_details['fast_food_quantity']);
+//        $total_price= CalculateTotalPrice::TotalPrice($ticket_price,$drink_price,
+//            $snack_price,$fast_food_price,$ticket_details['drinks_quantity'],
+//            $ticket_details['snacks_quantity'],$ticket_details['fast_food_quantity']);
 
 
         $save_ticket_details=
@@ -102,15 +102,15 @@ class TicketService implements TicketServiceInterface
                 "second_name"=>$ticket_details['second_name'],
                 "cinema_id"=>$cinema_id,
                 "show_time_id"=>$showtime_id,
-                "total_price"=>$total_price,
+//                "total_price"=>$total_price,
                 "ticketnumber"=>$ticket_number,
-                "drink_id"=>$drink_id,
-                "fastfood_id"=>$fast_food_id,
-                "snack_id"=>$snack_id,
-                "drink_quantity"=>$ticket_details['drinks_quantity'],
-                "fast_food_quantity"=>$ticket_details['fast_food_quantity'],
+//                "drink_id"=>$drink_id,
+//                "fastfood_id"=>$fast_food_id,
+//                "snack_id"=>$snack_id,
+//                "drink_quantity"=>$ticket_details['drinks_quantity'],
+//                "fast_food_quantity"=>$ticket_details['fast_food_quantity'],
                 "seat_id"=>$seat_id,
-                "snack_quantity"=>$ticket_details['snacks_quantity'],
+//                "snack_quantity"=>$ticket_details['snacks_quantity'],
 
             ];
 

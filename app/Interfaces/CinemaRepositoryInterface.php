@@ -13,3 +13,4 @@ interface CinemaRepositoryInterface
 
     public function FindCinemaNameByCinemaId ($cinema_id);
 }
+

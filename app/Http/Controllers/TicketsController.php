@@ -24,31 +24,43 @@ class TicketsController extends Controller
         return TicketsResource::collection($this->ticketService->RetrieveAllTickets());
     }
 
-    public function create()
+    public function create(TicketRequest $ticketRequest)
     {
-        $valid_ticket_request =
-            [
-                "movie_name"=>"Morbius",
-                "email_address"=>"Melvin@gmail.com",
-                "first_name"=>"melvin",
-                "second_name"=>"ochieng",
-                "cinema"=>"Anga Cinemas",
-                "time_from"=>"08:00:00",
-                "time_to"=>"10:00:00",
-                "drinks"=>"pepsi",
-                "snacks"=>"biscuits",
-                "fast_food"=>"burger",
-                "drinks_quantity"=>1,
-                "snacks_quantity"=>2,
-                "fast_food_quantity"=>3
+
+
+        $generatedTicketNumbers = [];
+
+        foreach ($ticketRequest->all() as $item){
+
+            $generatedTicketNumbers[] = [
+                'ticketNumber' => $this->ticketService->BookTicket($item)['ticket_number'],
             ];
 
-        $response = $this->ticketService->BookTicket($valid_ticket_request);
+        }
+
+//        $validated_ticket_request = $ticketRequest->validated();
+//        $valid_ticket_request =
+//            [
+//                "movie_name"=>"Morbius",
+//                "email_address"=>"Melvin@gmail.com",
+//                "first_name"=>"melvin",
+//                "second_name"=>"ochieng",
+//                "cinema"=>"Anga Cinemas",
+//                "time_from"=>"08:00:00",
+//                "time_to"=>"10:00:00",
+//                "drinks"=>"pepsi",
+//                "snacks"=>"biscuits",
+//                "fast_food"=>"burger",
+//                "drinks_quantity"=>1,
+//                "snacks_quantity"=>2,
+//                "fast_food_quantity"=>3
+//            ];
+
 
 
 
         return response()->json([
-           'ticketno' => $response['ticketnumber']
+           'ticketno' => $generatedTicketNumbers
         ]);
 
     }

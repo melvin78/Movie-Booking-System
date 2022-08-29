@@ -21,6 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::controller(\App\Http\Controllers\TicketsController::class)->group(function (){
     Route::get('/tickets','index');
+    Route::post('/book-ticket','create');
 });
 
 Route::controller(\App\Http\Controllers\MoviesController::class)->group(function (){
@@ -58,9 +59,7 @@ Route::controller(\App\Http\Controllers\SnacksController::class)->group(function
     Route::get('/snacks','index');
 });
 
-Route::controller(\App\Http\Controllers\TicketsController::class)->group(function (){
-    Route::get('/book-ticket','create');
-});
+
 
 
 Route::controller(\App\Http\Controllers\SeatsController::class)->group(function (){

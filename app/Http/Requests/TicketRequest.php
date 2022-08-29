@@ -23,11 +23,6 @@ class TicketRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-
-            'EmailAddress'=>'required',
-            'FirstName'=>'required',
-            'SecondName'=>'required'
-        ];
+        return [];
     }
 }
