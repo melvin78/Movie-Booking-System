@@ -23,7 +23,7 @@ interface SeatRepositoryInterface
 
     public function SetSeatsIsBookedByCinema($cinema_id);
 
-    public function SetSeatIsBookedByCinema($cinema_id,$seat_no);
+    public function SetSeatIsBookedByCinema($cinema_id,$seat_no,$show_time_id);
 
     public function SetSeatsIsBooked();
 

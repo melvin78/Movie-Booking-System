@@ -78,10 +78,11 @@ class SeatRepository implements SeatRepositoryInterface
         ]);
     }
 
-    public function SetSeatIsBookedByCinema($cinema_id, $seat_no)
+    public function SetSeatIsBookedByCinema($cinema_id, $seat_no,$show_time_id)
     {
         return seats::where('cinema_id', '=', $cinema_id)
             ->where('seat_number', '=', $seat_no)
+            ->where('show_time_id','=',$show_time_id)
             ->update([
                 "isBooked" => 1
             ]);
