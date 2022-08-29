@@ -26,4 +26,6 @@ interface SeatRepositoryInterface
     public function SetSeatsIsBooked();
 
     public function UnSetSeatsIsBooked();
+
+    public function FindSeatNoBySeatId($seat_id);
 }

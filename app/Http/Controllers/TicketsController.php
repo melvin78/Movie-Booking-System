@@ -4,18 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TicketRequest;
 use App\Http\Resources\TicketsResource;
+use App\Interfaces\SeatServiceInterface;
 use App\Interfaces\TicketServiceInterface;
 use App\Models\Tickets;
 use App\Http\Requests\StoreTicketsRequest;
 use App\Http\Requests\UpdateTicketsRequest;
+use Carbon\Carbon;
 
 class TicketsController extends Controller
 {
     private TicketServiceInterface $ticketService;
+    private SeatServiceInterface $seatService;
 
-    public function __construct(TicketServiceInterface $ticketService)
+    public function __construct(TicketServiceInterface $ticketService, SeatServiceInterface $seatService)
     {
         $this->ticketService = $ticketService;
+        $this->seatService = $seatService;
     }
 
 
@@ -29,38 +33,19 @@ class TicketsController extends Controller
 
 
         $generatedTicketNumbers = [];
+        $ticketRequests = $ticketRequest->all();
 
-        foreach ($ticketRequest->all() as $item){
+        foreach ($ticketRequests as $item) {
 
-            $generatedTicketNumbers[] = [
-                'ticketNumber' => $this->ticketService->BookTicket($item)['ticket_number'],
-            ];
+
+            $generatedTicketNumbers[] = $this->ticketService->BookTicket($item);
+
 
         }
 
-//        $validated_ticket_request = $ticketRequest->validated();
-//        $valid_ticket_request =
-//            [
-//                "movie_name"=>"Morbius",
-//                "email_address"=>"Melvin@gmail.com",
-//                "first_name"=>"melvin",
-//                "second_name"=>"ochieng",
-//                "cinema"=>"Anga Cinemas",
-//                "time_from"=>"08:00:00",
-//                "time_to"=>"10:00:00",
-//                "drinks"=>"pepsi",
-//                "snacks"=>"biscuits",
-//                "fast_food"=>"burger",
-//                "drinks_quantity"=>1,
-//                "snacks_quantity"=>2,
-//                "fast_food_quantity"=>3
-//            ];
-
-
-
 
         return response()->json([
-           'ticketno' => $generatedTicketNumbers
+            'ticketno' => $generatedTicketNumbers
         ]);
 
     }
@@ -74,7 +59,7 @@ class TicketsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Tickets  $tickets
+     * @param \App\Models\Tickets $tickets
      * @return \Illuminate\Http\Response
      */
     public function show(Tickets $tickets)
@@ -85,7 +70,7 @@ class TicketsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Tickets  $tickets
+     * @param \App\Models\Tickets $tickets
      * @return \Illuminate\Http\Response
      */
     public function edit(Tickets $tickets)

@@ -27,5 +27,11 @@ interface SeatServiceInterface
 
     public function GetSeatIdentity($cinema_id,$seat_id);
 
+    public function GetSeatNumber($seat_id);
+
+    public function MakeSeatUnavailable($cinema_id,$seat_no);
+
+
+
 
 }

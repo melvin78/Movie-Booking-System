@@ -14,6 +14,7 @@ use App\Interfaces\TicketServiceInterface;
 use App\Repository\TicketRepository;
 use App\Utils\CalculateTotalPrice;
 use App\Utils\GenerateTicketNumber;
+use Carbon\Carbon;
 
 class TicketService implements TicketServiceInterface
 {
@@ -34,7 +35,7 @@ class TicketService implements TicketServiceInterface
                                 SnackServiceInterface    $snackService,
                                 DrinkServiceInterface    $drinkService,
                                 FastFoodServiceInterface $fastFoodService,
-                                SeatServiceInterface $seatService,
+                                SeatServiceInterface     $seatService,
                                 MovieServiceInterface    $movieService)
     {
 
@@ -57,65 +58,67 @@ class TicketService implements TicketServiceInterface
 
     public function BookTicket(array $ticket_details)
     {
-        $showtime_id = $this->showTimeService->SpecificShowTimeId($ticket_details['time_from'],$ticket_details['time_to']);
-        $cinema_short_code= $this->cinemaService->GetCinemaShortCode($ticket_details['cinema']);
-        $movie_short_code= $this->movieService->MovieShortCode($ticket_details['movie_name']);
+        $showtime_id = $this->showTimeService->SpecificShowTimeId($ticket_details['time_from'], $ticket_details['time_to']);
+        $cinema_short_code = $this->cinemaService->GetCinemaShortCode($ticket_details['cinema']);
+        $movie_short_code = $this->movieService->MovieShortCode($ticket_details['movie_name']);
         $movie_id = $this->movieService->MovieId($ticket_details['movie_name']);
-        $cinema_id= $this->cinemaService->GetCinemaId($ticket_details['cinema']);
-        $seat_id = $this->seatService->GetSeatIdentity($cinema_id,$ticket_details['seat_number']);
+        $cinema_id = $this->cinemaService->GetCinemaId($ticket_details['cinema']);
+        $seat_id = $this->seatService->GetSeatIdentity($cinema_id, $ticket_details['seat_number']);
 
 
-        if(isset($ticket_details['snacks'])){
-            $snack_price=$this->snackService->SnacksPrice($ticket_details['snacks']);
+        if (isset($ticket_details['snacks'])) {
+            $snack_price = $this->snackService->SnacksPrice($ticket_details['snacks']);
             $snack_id = $this->snackService->GetSnackId($ticket_details['snacks']);
 
 
         }
-        if (isset($ticket_details['drinks'])){
-            $drink_price= $this->drinkService->GetDrinkPrice($ticket_details['drinks']);
+        if (isset($ticket_details['drinks'])) {
+            $drink_price = $this->drinkService->GetDrinkPrice($ticket_details['drinks']);
             $drink_id = $this->drinkService->GetDrinkId($ticket_details['drinks']);
 
 
         }
 
-        if (isset($ticket_details['fast_food'])){
-            $fast_food_price= $this->fastFoodService->GetFastFoodPrice($ticket_details['fast_food']);
+        if (isset($ticket_details['fast_food'])) {
+            $fast_food_price = $this->fastFoodService->GetFastFoodPrice($ticket_details['fast_food']);
             $fast_food_id = $this->fastFoodService->GetFastFoodId($ticket_details['fast_food']);
 
 
         }
 
-        $ticket_price= $this->movieService->MoviePrice($movie_id);
 
-        $ticket_number= GenerateTicketNumber::GenerateTicketNumber($cinema_short_code,$movie_short_code);
+        $ticket_number = GenerateTicketNumber::GenerateTicketNumber($cinema_short_code, $movie_short_code);
 
-//        $total_price= CalculateTotalPrice::TotalPrice($ticket_price,$drink_price,
-//            $snack_price,$fast_food_price,$ticket_details['drinks_quantity'],
-//            $ticket_details['snacks_quantity'],$ticket_details['fast_food_quantity']);
-
-
-        $save_ticket_details=
+        $save_ticket_details =
             [
-                "movie_id"=>$movie_id,
-                "email_address"=>$ticket_details['email_address'],
-                "first_name"=>$ticket_details['first_name'],
-                "second_name"=>$ticket_details['second_name'],
-                "cinema_id"=>$cinema_id,
-                "show_time_id"=>$showtime_id,
-//                "total_price"=>$total_price,
-                "ticketnumber"=>$ticket_number,
-//                "drink_id"=>$drink_id,
-//                "fastfood_id"=>$fast_food_id,
-//                "snack_id"=>$snack_id,
-//                "drink_quantity"=>$ticket_details['drinks_quantity'],
-//                "fast_food_quantity"=>$ticket_details['fast_food_quantity'],
-                "seat_id"=>$seat_id,
-//                "snack_quantity"=>$ticket_details['snacks_quantity'],
-
+                "movie_id" => $movie_id,
+                "email_address" => $ticket_details['email_address'],
+                "first_name" => $ticket_details['first_name'],
+                "second_name" => $ticket_details['second_name'],
+                "cinema_id" => $cinema_id,
+                "show_time_id" => $showtime_id,
+                "ticketnumber" => $ticket_number,
+                "seat_id" => $seat_id,
+                "price" => $this->movieService->MoviePrice($movie_id)
             ];
 
 
-        return $this->ticketRepository->AddTickets($save_ticket_details);
+        $tickets_Saved = $this->ticketRepository->AddTickets($save_ticket_details);
+
+        $this->seatService->MakeSeatUnavailable($cinema_id,$ticket_details['seat_number']);
+
+        return [
+
+            'ticketNumber' => $tickets_Saved['ticketnumber'],
+            'SeatNo' => $this->seatService->GetSeatNumber($tickets_Saved['seat_id']),
+            'Price' => $tickets_Saved['price'],
+            'StartTime' => Carbon::createFromFormat('H:i:s', $ticket_details['time_from'], 'UTC')->format('h:i A'),
+            'Endtime' => Carbon::createFromFormat('H:i:s', $ticket_details['time_to'], 'UTC')->format('h:i A'),
+            'MovieName' => $ticket_details['movie_name'],
+            'CinemaName' => $ticket_details['cinema'],
+            'MovieTitle' => $ticket_details['movie_name'],
+
+        ];
 
 
     }

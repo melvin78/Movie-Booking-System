@@ -108,4 +108,9 @@ class SeatRepository implements SeatRepositoryInterface
 
         return $finalInfo;
     }
+
+    public function FindSeatNoBySeatId($seat_id)
+    {
+        return seats::where('id','=',$seat_id)->value('seat_number');
+    }
 }
