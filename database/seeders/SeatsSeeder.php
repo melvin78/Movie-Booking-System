@@ -16,13 +16,14 @@ class SeatsSeeder extends Seeder
     public function run()
     {
         $rows = ['A','B','C','D','E','F','G'];
-        $columns = [15,16,17,18,19,20,21];
+        $columns = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21];
         for($i =0 ;$i<count($rows);$i++){
             for($j = 0; $j <count($columns);$j++){
                 DB::table('seats')->insert([
                     'seat_number'=>$rows[$i].$columns[$j],
-                    'cinema_id'=> 4,
-                    'isBooked'=>false
+                    'cinema_id'=> 3,
+                    'isBooked'=>false,
+                    'show_time_id'=>7
                 ]);
             }
         }

@@ -26,7 +26,8 @@ class SeatsFactory extends Factory
             for($j = 0; $j <count($columns);$j++){
              DB::table('seats')->insert([
                  'seat_number'=>$rows[$i].$columns[$j],
-                 'cinema'=> 1
+                 'cinema_id'=> 7,
+
              ]);
             }
         }
