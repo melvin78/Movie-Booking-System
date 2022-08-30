@@ -24,7 +24,8 @@ class CinemaSeatsRequest extends FormRequest
     public function rules()
     {
         return [
-            'CinemaId'=>'required'
+            'CinemaId'=>'required',
+            'ShowTimeId'=>'required'
         ];
     }
 }

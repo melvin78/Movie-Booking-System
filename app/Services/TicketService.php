@@ -105,6 +105,7 @@ class TicketService implements TicketServiceInterface
 
         $tickets_Saved = $this->ticketRepository->AddTickets($save_ticket_details);
 
+
         $this->seatService->MakeSeatUnavailable($cinema_id,$ticket_details['seat_number'],$showtime_id);
 
         return [
