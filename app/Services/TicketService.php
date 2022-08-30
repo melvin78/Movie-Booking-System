@@ -118,6 +118,8 @@ class TicketService implements TicketServiceInterface
             'MovieName' => $ticket_details['movie_name'],
             'CinemaName' => $ticket_details['cinema'],
             'MovieTitle' => $ticket_details['movie_name'],
+            'PurchaseDate'=>Carbon::parse($tickets_Saved['created_at'])->format('Y-m-d H:i')
+
 
         ];
 
