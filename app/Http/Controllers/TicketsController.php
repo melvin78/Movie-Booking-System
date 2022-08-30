@@ -6,10 +6,12 @@ use App\Http\Requests\TicketRequest;
 use App\Http\Resources\TicketsResource;
 use App\Interfaces\SeatServiceInterface;
 use App\Interfaces\TicketServiceInterface;
+use App\Mail\TicketPurchasedSuccessfully;
 use App\Models\Tickets;
 use App\Http\Requests\StoreTicketsRequest;
 use App\Http\Requests\UpdateTicketsRequest;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 
 class TicketsController extends Controller
 {
@@ -51,7 +53,7 @@ class TicketsController extends Controller
 
     public function store(TicketRequest $request)
     {
-        //
+        Mail::to('ochieng088@gmail.com')->send(new TicketPurchasedSuccessfully());
     }
 
     /**

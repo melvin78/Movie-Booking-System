@@ -22,6 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::controller(\App\Http\Controllers\TicketsController::class)->group(function (){
     Route::get('/tickets','index');
     Route::post('/book-ticket','create');
+    Route::get('/test-email','store');
 });
 
 Route::controller(\App\Http\Controllers\MoviesController::class)->group(function (){
