@@ -118,6 +118,7 @@ class TicketService implements TicketServiceInterface
             'StartTime' => Carbon::createFromFormat('H:i:s', $ticket_details['time_from'], 'UTC')->format('h:i A'),
             'Endtime' => Carbon::createFromFormat('H:i:s', $ticket_details['time_to'], 'UTC')->format('h:i A'),
             'MovieName' => $ticket_details['movie_name'],
+            'ShowTimeDate'=>$ticket_details['show_time_date'],
             'CinemaName' => $ticket_details['cinema'],
             'MovieTitle' => $ticket_details['movie_name'],
             'PurchaseDate'=>Carbon::parse($tickets_Saved['created_at'])->format('Y-m-d H:i')
