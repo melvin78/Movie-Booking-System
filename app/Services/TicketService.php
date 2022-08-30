@@ -110,6 +110,8 @@ class TicketService implements TicketServiceInterface
 
         return [
 
+            'first name'=>$ticket_details['first_name'],
+            'email_address'=>$ticket_details['email_address'],
             'ticketNumber' => $tickets_Saved['ticketnumber'],
             'SeatNo' => $this->seatService->GetSeatNumber($tickets_Saved['seat_id']),
             'Price' => $tickets_Saved['price'],

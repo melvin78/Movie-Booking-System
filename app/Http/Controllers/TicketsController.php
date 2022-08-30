@@ -8,20 +8,17 @@ use App\Interfaces\SeatServiceInterface;
 use App\Interfaces\TicketServiceInterface;
 use App\Mail\TicketPurchasedSuccessfully;
 use App\Models\Tickets;
-use App\Http\Requests\StoreTicketsRequest;
-use App\Http\Requests\UpdateTicketsRequest;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
+use Throwable;
 
 class TicketsController extends Controller
 {
     private TicketServiceInterface $ticketService;
-    private SeatServiceInterface $seatService;
 
-    public function __construct(TicketServiceInterface $ticketService, SeatServiceInterface $seatService)
+    public function __construct(TicketServiceInterface $ticketService)
     {
         $this->ticketService = $ticketService;
-        $this->seatService = $seatService;
     }
 
 
@@ -45,6 +42,12 @@ class TicketsController extends Controller
 
         }
 
+        try {
+            Mail::to($generatedTicketNumbers[0]['email_address'])->send(new TicketPurchasedSuccessfully($generatedTicketNumbers));
+        }
+        catch (Throwable $t){
+
+        }
 
         return response()->json($generatedTicketNumbers);
 
@@ -53,7 +56,7 @@ class TicketsController extends Controller
 
     public function store(TicketRequest $request)
     {
-        Mail::to('ochieng088@gmail.com')->send(new TicketPurchasedSuccessfully());
+
     }
 
     /**
