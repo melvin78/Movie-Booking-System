@@ -42,10 +42,10 @@ class SeatService implements SeatServiceInterface
         return $this->seatRepository->UnSetSeatIsBookedByCinema($cinema_id,$seat_no);
     }
 
-    public function BookSeat($cinema_id, $seatno)
+    public function BookSeat($cinema_id, $seatno,$show_time_id)
     {
 
-        return $this->seatRepository->SetSeatIsBookedByCinema($cinema_id,$seatno);
+        return $this->seatRepository->SetSeatIsBookedByCinema($cinema_id,$seatno,$show_time_id);
     }
 
     public function MakeAllSeatsUnavailable()
@@ -80,10 +80,10 @@ class SeatService implements SeatServiceInterface
         return $this->seatRepository->FindSeatNoBySeatId($seat_id);
     }
 
-    public function MakeSeatUnavailable($cinema_id, $seat_no)
+    public function MakeSeatUnavailable($cinema_id, $seat_no,$show_time_id)
     {
 
-        return $this->seatRepository->SetSeatIsBookedByCinema($cinema_id,$seat_no);
+        return $this->seatRepository->SetSeatIsBookedByCinema($cinema_id,$seat_no,$show_time_id);
     }
 
     public function AllSeatsAvailableByShowTimeAndCinemaId($cinema_id, $show_time_id)

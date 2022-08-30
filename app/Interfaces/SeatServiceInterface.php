@@ -19,7 +19,7 @@ interface SeatServiceInterface
 
     public function MakeSeatAvailableByCinema($cinema_id,$seat_no);
 
-    public function BookSeat($cinema_id,$seatno);
+    public function BookSeat($cinema_id,$seatno,$show_time_id);
 
     public function MakeAllSeatsUnavailable();
 
@@ -29,7 +29,7 @@ interface SeatServiceInterface
 
     public function GetSeatNumber($seat_id);
 
-    public function MakeSeatUnavailable($cinema_id,$seat_no);
+    public function MakeSeatUnavailable($cinema_id,$seat_no,$show_time_id);
 
     public function AllSeatsAvailableByShowTimeAndCinemaId ($cinema_id,$show_time_id);
 

@@ -56,7 +56,7 @@ class TicketService implements TicketServiceInterface
     }
 
 
-    public function BookTicket(array $ticket_details)
+    public function BookTicket(array $ticket_details): array
     {
         $showtime_id = $this->showTimeService->SpecificShowTimeId($ticket_details['time_from'], $ticket_details['time_to']);
         $cinema_short_code = $this->cinemaService->GetCinemaShortCode($ticket_details['cinema']);
@@ -105,7 +105,7 @@ class TicketService implements TicketServiceInterface
 
         $tickets_Saved = $this->ticketRepository->AddTickets($save_ticket_details);
 
-        $this->seatService->MakeSeatUnavailable($cinema_id,$ticket_details['seat_number']);
+        $this->seatService->MakeSeatUnavailable($cinema_id,$ticket_details['seat_number'],$showtime_id);
 
         return [
 
