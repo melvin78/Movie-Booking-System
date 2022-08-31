@@ -50,7 +50,7 @@ COPY --chown=$NON_ROOT_USER:$NON_ROOT_GROUP .deploy $LARAVEL_PATH/
 COPY ./.deploy/config/php/local.ini /usr/local/etc/php/conf.d/local.ini
 
 WORKDIR /var/www/cinema
-COPY . .
+COPY . ./
 RUN composer dump-autoload -o \
     && chown -R :www-data /var/www/cinema \
     && chmod -R 775 /var/www/cinema/storage /var/www/cinema/bootstrap/cache
