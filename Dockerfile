@@ -47,7 +47,7 @@ RUN composer install --prefer-dist --no-scripts --no-dev --no-autoloader
 RUN rm -rf /home/$NON_ROOT_USER/.composer
 
 # Copy app
-COPY --chown=$NON_ROOT_USER:$NON_ROOT_GROUP . ./
+COPY . ./
 COPY ./.deploy/config/php/local.ini /usr/local/etc/php/conf.d/local.ini
 RUN composer dump-autoload -o \
     && chown -R :www-data /var/www/cinema \
