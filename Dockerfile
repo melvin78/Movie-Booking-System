@@ -12,7 +12,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 # install application dependencies
 WORKDIR /var/www/app
-COPY ./src/composer.json ./src/composer.lock* ./
+COPY composer.json composer.lock ./
+RUN composer update --no-scripts --no-scripts --no-dev --no-autoloader
 RUN composer install --no-scripts --no-autoloader --ansi --no-interaction
 
 # add custom php-fpm pool settings, these get written at entrypoint startup
@@ -76,7 +77,7 @@ COPY ./docker/default.conf /etc/nginx/conf.d/default.conf
 
 # copy application code
 WORKDIR /var/www/app
-COPY ./src .
+COPY . ./
 RUN composer dump-autoload -o \
     && chown -R :www-data /var/www/app \
     && chmod -R 775 /var/www/app/storage /var/www/app/bootstrap/cache
@@ -85,3 +86,4 @@ EXPOSE 80
 
 # run supervisor
 CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
+
