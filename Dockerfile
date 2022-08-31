@@ -11,7 +11,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
     && composer --ansi --version --no-interaction
 
 # install application dependencies
-WORKDIR /var/www/app
+WORKDIR /var/www/cinema
 COPY composer.json composer.lock ./
 RUN composer update --no-scripts --no-scripts --no-dev --no-autoloader
 RUN composer install --no-scripts --no-autoloader --ansi --no-interaction
@@ -76,11 +76,11 @@ COPY ./docker/nginx.conf /etc/nginx/nginx.conf
 COPY ./docker/default.conf /etc/nginx/conf.d/default.conf
 
 # copy application code
-WORKDIR /var/www/app
+WORKDIR /var/www/cinema
 COPY . ./
 RUN composer dump-autoload -o \
-    && chown -R :www-data /var/www/app \
-    && chmod -R 775 /var/www/app/storage /var/www/app/bootstrap/cache
+    && chown -R :www-data /var/www/cinema \
+    && chmod -R 775 /var/www/cinema/storage /var/www/cinema/bootstrap/cache
 
 EXPOSE 80
 
