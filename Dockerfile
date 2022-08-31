@@ -1,6 +1,9 @@
 ARG PHP_VERSION=${PHP_VERSION:-8.1.0}
-FROM php:${PHP_VERSION}-fpm-alpine AS php-system-setup
 
+FROM php:${PHP_VERSION}-fpm-alpine AS php-system-setup
+ENV NGINX_VERSION 1.20.2
+ENV NJS_VERSION   0.7.0
+ENV PKG_RELEASE   1
 # Install system dependencies
 RUN apk add --no-cache dcron busybox-suid libcap curl zip unzip git
 
