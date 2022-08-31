@@ -1,13 +1,4 @@
 #!/bin/sh
-
-
-
-echo "🎬 entrypoint.sh: [$(whoami)] [PHP $(php -r 'echo phpversion();')]"
-composer dump-autoload --no-interaction --no-dev --optimize
-php artisan migrate --no-interaction --force
-echo "🎬 start supervisord"
-supervisord -c var/www/cinema/.deploy/config/supervisor.conf
-
 set -e
 
 # write the php-fpm config
@@ -20,3 +11,4 @@ set -e
     echo pm.min_spare_servers = "$FPM_PM_MIN_SPARE_SERVERS"; \
     echo pm.max_spare_servers = "$FPM_PM_MAX_SPARE_SERVERS"; \
 } > /usr/local/etc/php-fpm.d/zzz-app.conf
+
