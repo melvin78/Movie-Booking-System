@@ -40,4 +40,9 @@ class MoviesService implements MovieServiceInterface
     {
         return $this->movieRepository->FindMoviePrice($movie_id);
     }
+
+    public function MoviePathLocation($movie_id)
+    {
+        return $this->movieRepository->FindMoviePath($movie_id);
+    }
 }

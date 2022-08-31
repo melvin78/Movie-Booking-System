@@ -14,5 +14,7 @@ interface MovieRepositoryInterface
     public function FindMoviePlotAndRuntime($movie_id);
 
     public function FindMoviePrice($movie_id);
+
+    public function FindMoviePath($movie_id);
 }
 

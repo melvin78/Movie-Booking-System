@@ -64,6 +64,7 @@ class TicketService implements TicketServiceInterface
         $movie_id = $this->movieService->MovieId($ticket_details['movie_name']);
         $cinema_id = $this->cinemaService->GetCinemaId($ticket_details['cinema']);
         $seat_id = $this->seatService->GetSeatIdentity($cinema_id, $ticket_details['seat_number']);
+        $movie_image_path =  $this->movieService->MoviePathLocation($movie_id);
 
 
         if (isset($ticket_details['snacks'])) {
@@ -118,9 +119,10 @@ class TicketService implements TicketServiceInterface
             'StartTime' => Carbon::createFromFormat('H:i:s', $ticket_details['time_from'], 'UTC')->format('h:i A'),
             'Endtime' => Carbon::createFromFormat('H:i:s', $ticket_details['time_to'], 'UTC')->format('h:i A'),
             'MovieName' => $ticket_details['movie_name'],
-            'ShowTimeDate'=>$ticket_details['show_time_date'],
+            'ShowTimeDate'=>Carbon::parse($ticket_details['show_time_date'])->format('l m-d-Y'),
             'CinemaName' => $ticket_details['cinema'],
             'MovieTitle' => $ticket_details['movie_name'],
+            'image'=>$movie_image_path,
             'PurchaseDate'=>Carbon::parse($tickets_Saved['created_at'])->format('Y-m-d H:i')
 
 

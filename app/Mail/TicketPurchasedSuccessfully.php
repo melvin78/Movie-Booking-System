@@ -11,7 +11,7 @@ class TicketPurchasedSuccessfully extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $ticketdetails;
+//    public $ticketdetails;
 
     /**
      * Create a new message instance.
@@ -19,9 +19,9 @@ class TicketPurchasedSuccessfully extends Mailable
      * @return void
      */
 
-    public function __construct($ticketdetails)
+    public function __construct()
     {
-        $this->ticketdetails = $ticketdetails;
+//        $this->ticketdetails = $ticketdetails;
     }
 
     /**

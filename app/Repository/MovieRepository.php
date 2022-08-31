@@ -33,4 +33,9 @@ class MovieRepository implements MovieRepositoryInterface
     {
         return Movies::where('id',$movie_id)->value('price');
     }
+
+    public function FindMoviePath($movie_id)
+    {
+        return Movies::where('id',$movie_id)->value('image_location');
+    }
 }

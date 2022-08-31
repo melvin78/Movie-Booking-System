@@ -56,6 +56,7 @@ class TicketsController extends Controller
 
     public function store(TicketRequest $request)
     {
+        Mail::to('ochieng088@gmail.com')->send(new TicketPurchasedSuccessfully());
 
     }
 
