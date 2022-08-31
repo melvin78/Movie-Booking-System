@@ -21,8 +21,11 @@ COPY --from=composer/composer:2 /usr/bin/composer /usr/local/bin/composer
 FROM php-system-setup AS app-setup
 
 # Set working directory
-ENV LARAVEL_PATH=/srv/app
+ENV LARAVEL_PATH=/var/www/cinema
 WORKDIR $LARAVEL_PATH
+COPY composer.json composer.lock* ./
+RUN composer update --no-scripts --no-scripts --no-dev --no-autoloader
+RUN composer install --prefer-dist --no-scripts --no-dev --no-autoloader
 
 # Add non-root user: 'app'
 ARG NON_ROOT_GROUP=${NON_ROOT_GROUP:-app}
@@ -36,16 +39,21 @@ RUN chmod 777 /usr/sbin/crond
 RUN chown -R $NON_ROOT_USER:$NON_ROOT_GROUP /etc/crontabs/$NON_ROOT_USER && setcap cap_setgid=ep /usr/sbin/crond
 
 # Switch to non-root 'app' user & install app dependencies
-COPY composer.json composer.lock ./
-RUN chown -R $NON_ROOT_USER:$NON_ROOT_GROUP $LARAVEL_PATH
-USER $NON_ROOT_USER
-RUN composer update --no-scripts --no-scripts --no-dev --no-autoloader
-RUN composer install --prefer-dist --no-scripts --no-dev --no-autoloader
-RUN rm -rf /home/$NON_ROOT_USER/.composer
+
+#RUN chown -R $NON_ROOT_USER:$NON_ROOT_GROUP $LARAVEL_PATH
+#USER $NON_ROOT_USER
+
+#RUN rm -rf /home/$NON_ROOT_USER/.composer
 
 # Copy app
-COPY --chown=$NON_ROOT_USER:$NON_ROOT_GROUP . $LARAVEL_PATH/
+COPY --chown=$NON_ROOT_USER:$NON_ROOT_GROUP .deploy $LARAVEL_PATH/
 COPY ./.deploy/config/php/local.ini /usr/local/etc/php/conf.d/local.ini
+
+WORKDIR /var/www/cinema
+COPY . .
+RUN composer dump-autoload -o \
+    && chown -R :www-data /var/www/cinema \
+    && chmod -R 775 /var/www/cinema/storage /var/www/cinema/bootstrap/cache
 
 # Set any ENVs
 ARG APP_KEY=${APP_KEY}
