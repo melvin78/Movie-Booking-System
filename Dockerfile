@@ -101,6 +101,9 @@ ARG MAILGUN_SECRET=${MAILGUN_SECRET}
 
 # Start app
 EXPOSE 80
+WORKDIR /var/www/cinema
+RUN php artisan key:generate
+RUN php artisan serve
 COPY ./.deploy/entrypoint.sh /
 
 ENTRYPOINT ["sh", "/entrypoint.sh"]
