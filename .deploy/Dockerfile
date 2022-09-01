@@ -2,14 +2,12 @@ ARG PHP_VERSION=${PHP_VERSION:-8.1.3}
 FROM php:${PHP_VERSION}-fpm-alpine AS php-system-setup
 
 # Install system dependencies
-RUN apk add --no-cache dcron busybox-suid libcap curl zip unzip git
+RUN apk add --no-cache dcron busybox-suid libcap curl zip unzip git supervisor
 
 # Install PHP extensions
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
 RUN install-php-extensions intl bcmath gd pdo_mysql pdo_pgsql opcache redis uuid exif pcntl zip
 
-# Install supervisord implementation
-COPY --from=ochinchina/supervisord:latest /usr/local/bin/supervisord /usr/local/bin/supervisord
 
 # Install caddy
 COPY --from=caddy:2.2.1 /usr/bin/caddy /usr/local/bin/caddy
@@ -90,7 +88,11 @@ ARG PUSHER_APP_SECRET=${PUSHER_APP_SECRET}
 ARG PUSHER_APP_CLUSTER=${PUSHER_APP_CLUSTER}
 
 # Start app
-EXPOSE 80
 COPY ./.deploy/entrypoint.sh /
 
-ENTRYPOINT ["sh", "/entrypoint.sh"]
+# copy supervisor configuration
+COPY ./.deploy/config/supervisor.conf /etc/supervisord.conf
+
+EXPOSE 80
+# run supervisor
+CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
