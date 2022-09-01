@@ -30,7 +30,7 @@ RUN pecl install zip && docker-php-ext-enable zip \
 
 # Install caddy
 COPY --from=caddy:2.2.1 /usr/bin/caddy /usr/local/bin/caddy
-RUN setcap 'cap_net_bind_service=+ep' /usr/local/bin/caddy
+
 
 # Install composer
 COPY --from=composer/composer:2 /usr/bin/composer /usr/local/bin/composer
