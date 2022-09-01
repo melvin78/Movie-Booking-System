@@ -45,7 +45,7 @@ RUN rm -rf /home/$NON_ROOT_USER/.composer
 COPY --chown=$NON_ROOT_USER:$NON_ROOT_GROUP . $LARAVEL_PATH/
 RUN composer dump-autoload -o \
     && chown -R $NON_ROOT_USER /srv/app/ \
-    && chmod -R 775 /srv/app/storage /srv/app/bootstrap/cache
+    && chmod -R 777 /srv/app/storage /srv/app/bootstrap/cache
 COPY . ./
 COPY ./.deploy/config/php/local.ini /usr/local/etc/php/conf.d/local.ini
 
