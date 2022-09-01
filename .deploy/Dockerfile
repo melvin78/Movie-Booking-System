@@ -1,13 +1,32 @@
 ARG PHP_VERSION=${PHP_VERSION:-8.1.3}
 FROM php:${PHP_VERSION}-fpm-alpine AS php-system-setup
 
-# Install system dependencies
-RUN apk add --no-cache dcron busybox-suid libcap curl zip unzip git supervisor
+# install necessary alpine packages
+RUN apk update && apk add --no-cache \
+    zip \
+    unzip \
+    dos2unix \
+    supervisor \
+    libpng-dev \
+    libzip-dev \
+    freetype-dev \
+    libjpeg-turbo-dev
 
-# Install PHP extensions
-COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
-RUN install-php-extensions intl bcmath gd pdo_mysql pdo_pgsql opcache redis uuid exif pcntl zip
+# compile native PHP packages
+RUN docker-php-ext-install \
+    gd \
+    pcntl \
+    bcmath \
+    mysqli \
+    pdo_mysql
 
+# configure packages
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
+
+# install additional packages from PECL
+RUN pecl install zip && docker-php-ext-enable zip \
+    && pecl install igbinary && docker-php-ext-enable igbinary \
+    && yes | pecl install redis && docker-php-ext-enable redis
 
 # Install caddy
 COPY --from=caddy:2.2.1 /usr/bin/caddy /usr/local/bin/caddy
