@@ -20,5 +20,8 @@
     encode gzip
     header -X-Powered-By
     file_server
-    log
+   log {
+   	output file /var/log/access.log
+   }
+
 }
