@@ -24,7 +24,6 @@ WORKDIR $LARAVEL_PATH
 
 
 
-RUN chmod 777 access.log
 # Switch to non-root 'app' user & install app dependencies
 COPY composer.json composer.lock ./
 RUN composer update --prefer-dist --no-scripts --no-dev --no-autoloader
