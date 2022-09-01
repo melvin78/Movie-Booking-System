@@ -1,36 +1,17 @@
 ARG PHP_VERSION=${PHP_VERSION:-8.1.3}
 FROM php:${PHP_VERSION}-fpm-alpine AS php-system-setup
 
-# install necessary alpine packages
-RUN apk update && apk add --no-cache \
-    zip \
-    unzip \
-    dos2unix \
-    supervisor \
-    libpng-dev \
-    libzip-dev \
-    freetype-dev \
-    libjpeg-turbo-dev
+# Install system dependencies
+RUN apk add --no-cache dcron busybox-suid libcap curl zip unzip git supervisor
 
-# compile native PHP packages
-RUN docker-php-ext-install \
-    gd \
-    pcntl \
-    bcmath \
-    mysqli \
-    pdo_mysql
+# Install PHP extensions
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
+RUN install-php-extensions intl bcmath gd pdo_mysql pdo_pgsql opcache redis uuid exif pcntl zip
 
-# configure packages
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg
-
-# install additional packages from PECL
-RUN pecl install zip && docker-php-ext-enable zip \
-    && pecl install igbinary && docker-php-ext-enable igbinary \
-    && yes | pecl install redis && docker-php-ext-enable redis
 
 # Install caddy
 COPY --from=caddy:2.2.1 /usr/bin/caddy /usr/local/bin/caddy
-
+RUN setcap 'cap_net_bind_service=+ep' /usr/local/bin/caddy
 
 # Install composer
 COPY --from=composer/composer:2 /usr/bin/composer /usr/local/bin/composer
@@ -47,7 +28,10 @@ ARG NON_ROOT_USER=${NON_ROOT_USER:-app}
 RUN addgroup -S $NON_ROOT_GROUP && adduser -S $NON_ROOT_USER -G $NON_ROOT_GROUP
 RUN addgroup $NON_ROOT_USER wheel
 
-
+# Set cron job
+COPY ./.deploy/config/crontab /etc/crontabs/$NON_ROOT_USER
+RUN chmod 777 /usr/sbin/crond
+RUN chown -R $NON_ROOT_USER:$NON_ROOT_GROUP /etc/crontabs/$NON_ROOT_USER && setcap cap_setgid=ep /usr/sbin/crond
 
 # Switch to non-root 'app' user & install app dependencies
 COPY composer.json composer.lock ./
@@ -60,7 +44,7 @@ RUN rm -rf /home/$NON_ROOT_USER/.composer
 # Copy app
 COPY --chown=$NON_ROOT_USER:$NON_ROOT_GROUP . $LARAVEL_PATH/
 RUN composer dump-autoload -o \
-    && chown -R :$NON_ROOT_USER /srv/app/ \
+    && chown -R $NON_ROOT_USER /srv/app/ \
     && chmod -R 775 /srv/app/storage /srv/app/bootstrap/cache
 COPY . ./
 COPY ./.deploy/config/php/local.ini /usr/local/etc/php/conf.d/local.ini
