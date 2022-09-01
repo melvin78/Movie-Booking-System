@@ -16,7 +16,7 @@
         redir {path} 308
     }
 
-    php_fastcgi unix//run/php/php-fpm.sock
+    php_fastcgi 127.0.0.1:9000
     encode gzip
     header -X-Powered-By
     file_server
