@@ -1,6 +1,8 @@
 <p align="center"><a href="https://cinema.webmelvin.me" target="_blank"><img src="https://cinema.webmelvin.me/popcorn.png" width="400"></a></p>
 
+## Demo
 
+Check out [here](https://cinema.webmelvin.me)
 
 ## Melvin Cinema's Ring
 
@@ -19,6 +21,4 @@ would look like. Open to contributions!. See Screenshots Below
 
 
 
-## Demo
 
-Check out [here](https://cinema.webmelvin.me)
