@@ -23,6 +23,8 @@ Route::controller(\App\Http\Controllers\TicketsController::class)->group(functio
     Route::get('/tickets','index');
     Route::post('/book-ticket','create');
     Route::get('/test-email','store');
+    Route::get('/ticket-history/{id}','show');
+
 });
 
 Route::controller(\App\Http\Controllers\MoviesController::class)->group(function (){

@@ -42,12 +42,13 @@ RUN composer install --prefer-dist --no-scripts --no-dev --no-autoloader
 RUN rm -rf /home/$NON_ROOT_USER/.composer
 
 # Copy app
+COPY . ./
+COPY ./.deploy/config/php/local.ini /usr/local/etc/php/conf.d/local.ini
+
 COPY --chown=$NON_ROOT_USER:$NON_ROOT_GROUP . $LARAVEL_PATH/
 RUN composer dump-autoload -o \
     && chown -R $NON_ROOT_USER /srv/app/ \
     && chmod -R 777 /srv/app/storage /srv/app/bootstrap/cache
-COPY . ./
-COPY ./.deploy/config/php/local.ini /usr/local/etc/php/conf.d/local.ini
 
 # Set any ENVs
 ARG APP_KEY=${APP_KEY}

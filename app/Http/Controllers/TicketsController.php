@@ -8,6 +8,7 @@ use App\Interfaces\SeatServiceInterface;
 use App\Interfaces\TicketServiceInterface;
 use App\Mail\TicketPurchasedSuccessfully;
 use App\Models\Tickets;
+use App\Services\TicketsBoughtService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Throwable;
@@ -15,10 +16,12 @@ use Throwable;
 class TicketsController extends Controller
 {
     private TicketServiceInterface $ticketService;
+    private TicketsBoughtService $ticketsBoughtService;
 
-    public function __construct(TicketServiceInterface $ticketService)
+    public function __construct(TicketServiceInterface $ticketService,TicketsBoughtService $ticketsBoughtService)
     {
         $this->ticketService = $ticketService;
+        $this->ticketsBoughtService = $ticketsBoughtService;
     }
 
 
@@ -66,9 +69,9 @@ class TicketsController extends Controller
      * @param \App\Models\Tickets $tickets
      * @return \Illuminate\Http\Response
      */
-    public function show(Tickets $tickets)
+    public function show($id)
     {
-        //
+        return  $this->ticketsBoughtService->FindTicketsBoughtHistory($id);
     }
 
     /**
